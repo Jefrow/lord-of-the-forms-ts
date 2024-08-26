@@ -3,5 +3,7 @@ export type UserInformation = {
     lastName: string;
     email: string;
     city: string;
-    phone: string;
-}
+    phone:[string, string, string, string];
+} 
+
+export type PhoneInputState = [string,string,string,string]; 

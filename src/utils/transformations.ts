@@ -1,6 +1,5 @@
-export const capitalize = () => {
-    // todo: build this function
-    // `capitalize("jOn")` should output `"Jon"`
+export const capitalize = (str: string):string => {
+    return str.charAt(0).toUpperCase() + str.slice(1);  
 }
 
 export const formatPhoneNumber = () => {
