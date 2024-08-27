@@ -2,14 +2,14 @@ import { allCities } from "./all-cities";
 
 export const isEmailValid = (emailAddress: string) => {
     // eslint-disable-next-line no-useless-escape
-    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return !!emailAddress.match(regex);
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return !!emailAddress.match(emailRegex);
 }
 
 export const isNameInputValid = (nameInput: string): boolean => {
-    return (
-        nameInput.length > 2
-    )
+    return nameInput
+           .split('')
+           .every(char => char.toLowerCase() != char.toUpperCase()) && nameInput.length > 2
 }
 
 export const isCityValid = (cityInput: string): boolean => {
@@ -18,9 +18,9 @@ export const isCityValid = (cityInput: string): boolean => {
     )
 }
 
-export const isPhoneValid = (phoneInput: string) => {
-    const phoneRegex = /^[0-9]{3}[-]?[0-9]{3}[-]?[0-9]{4}$/
-    return !!phoneInput.match(phoneRegex); 
+export const isPhoneValid = (phoneInput:[string, string, string, string]): boolean => {
+    const phoneNumber = phoneInput.join(''); 
+    return (phoneNumber.length === 7)
 }
 
 {/* how would i validate a phone input? 
