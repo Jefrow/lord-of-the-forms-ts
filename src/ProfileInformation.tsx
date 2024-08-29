@@ -1,5 +1,5 @@
 import { UserInformation } from "./types";
-import { capitalize } from "./utils/transformations";
+import { capitalize, formatPhoneNumber } from "./utils/transformations";
 
 export const InfoRow = ({ label, value }: { label: string; value: string }) => {
   return (
@@ -30,7 +30,8 @@ export const ProfileInformation = ({
   }
   const { email, firstName, lastName, phone, city } = userData;
   
-  const phoneNumber = phone.toString(); 
+  console.log(`this is from ProfileInformation comp ${phone}`); 
+  const phoneNumber = formatPhoneNumber(phone);
   const captFName = capitalize(firstName);
   const captLName = capitalize(lastName); 
 

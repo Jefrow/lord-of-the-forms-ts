@@ -19,11 +19,7 @@ export const isCityValid = (cityInput: string): boolean => {
 }
 
 export const isPhoneValid = (phoneInput:[string, string, string, string]): boolean => {
-    const phoneNumber = phoneInput.join(''); 
-    return (phoneNumber.length === 7)
-}
 
-{/* how would i validate a phone input? 
-    -first 3 indexes should have 2 values. 
-    -last index should have 1 value. 
-*/}
+    
+    return(phoneInput.length === 4);  
+}

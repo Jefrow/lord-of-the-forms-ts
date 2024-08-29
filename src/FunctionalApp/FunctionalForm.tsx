@@ -51,7 +51,8 @@ export const FunctionalForm = ({
       isFirstNameInputValid &&
       isLastNameInputValid &&
       isEmailInputValid &&
-      isCityInputValid
+      isCityInputValid && 
+      isPhoneInputValid
     ) {
       return true;
     }
