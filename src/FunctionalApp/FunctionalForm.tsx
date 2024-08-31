@@ -255,6 +255,12 @@ export const FunctionalForm = ({
           />
         </div>
       </div>
+
+      {/*
+        -For phone input message, we need to keep track of each of the phone input, and maybe for the validation, we look for a pattern of "22-22-22-2"? 
+        and that we don't leave any input fields open...
+       
+       */}
       {shouldShowPhoneInputError && (
         <ErrorMessage message={phoneNumberErrorMessage} show={true} />
       )}

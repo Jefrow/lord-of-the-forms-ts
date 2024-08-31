@@ -19,7 +19,11 @@ export const isCityValid = (cityInput: string): boolean => {
 }
 
 export const isPhoneValid = (phoneInput:[string, string, string, string]): boolean => {
-
-    
-    return(phoneInput.length === 4);  
+    {/*
+     -couple ways to maybe do this? 
+     1. check that the phone input looks like (['11','22','22','2'])  with the first 3 strings having 2 numbers and the last one with 1 number
+     2. convert phone input into one long string and make sure that it has 7 numbers.  
+    */}
+    const phoneNumber = Array.from(phoneInput).join('');
+    return(phoneNumber.length === 7);  
 }
