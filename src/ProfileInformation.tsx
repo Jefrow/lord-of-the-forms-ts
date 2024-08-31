@@ -1,4 +1,5 @@
 import { UserInformation } from "./types";
+import { capitalize, formatPhoneNumber } from "./utils/transformations";
 
 export const InfoRow = ({ label, value }: { label: string; value: string }) => {
   return (
@@ -28,6 +29,12 @@ export const ProfileInformation = ({
     );
   }
   const { email, firstName, lastName, phone, city } = userData;
+  
+  console.log(`this is from ProfileInformation comp ${phone}`); 
+  const phoneNumber = formatPhoneNumber(phone);
+  const captFName = capitalize(firstName);
+  const captLName = capitalize(lastName); 
+
   return (
     <>
       <u>
@@ -35,11 +42,11 @@ export const ProfileInformation = ({
       </u>
       <div className="user-info">
         <InfoRow label="Email" value={email} />
-        <InfoRow label="First Name" value={firstName} />
-        <InfoRow label="Last Name" value={lastName} />
+        <InfoRow label="First Name" value={captFName} />
+        <InfoRow label="Last Name" value={captLName} />
         <InfoRow label="City" value={city} />
         {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
-        <InfoRow label="Phone" value={"12-34-56-7"} />
+        <InfoRow label="Phone" value={phoneNumber} />
       </div>
     </>
   );
