@@ -29,8 +29,7 @@ export const ProfileInformation = ({
     );
   }
   const { email, firstName, lastName, phone, city } = userData;
-  
-  console.log(`this is from ProfileInformation comp ${phone}`); 
+   
   const phoneNumber = formatPhoneNumber(phone);
   const captFName = capitalize(firstName);
   const captLName = capitalize(lastName); 

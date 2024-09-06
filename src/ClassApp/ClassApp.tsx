@@ -4,15 +4,19 @@ import { UserInformation } from "../types";
 import { ProfileInformation } from "../ProfileInformation";
 type State = { userInformation: UserInformation | null };
 
-const defaultUser: UserInformation = {
-  email: "default@default.com",
-  firstName: "Default",
-  lastName: "Default",
-  phone: "1234567",
-  city: "Hobbiton",
-};
+// const defaultUser: UserInformation = {
+//   email: "default@default.com",
+//   firstName: "Default",
+//   lastName: "Default",
+//   phone: "1234567",
+//   city: "Hobbiton",
+// };
 
 export class ClassApp extends Component<Record<string, never>, State> {
+  state ={
+    userInformation: null 
+  }
+
   render() {
     return (
       <>
@@ -21,10 +25,12 @@ export class ClassApp extends Component<Record<string, never>, State> {
           userData={
             // toggle the following lines to change
             // null
-            defaultUser
+            this.state.userInformation
           }
         />
-        <ClassForm />
+        <ClassForm handleUserInformation={(userInfo) => {
+          this.setState({userInformation:userInfo})
+        }}/>
       </>
     );
   }

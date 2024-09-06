@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEventHandler } from 'react';
+import { useState, useRef, ChangeEventHandler, FormEvent } from 'react';
 import { ErrorMessage } from '../ErrorMessage';
 import {
   isEmailValid,
@@ -26,7 +26,7 @@ export const FunctionalForm = ({
   const [lastNameInput, setLastNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [cityInput, setCityInput] = useState('');
-  const [phoneInputState, setPhoneInputState] = useState<PhoneInputState>([
+  const [phoneInput, setPhoneInput] = useState<PhoneInputState>([
     '',
     '',
     '',
@@ -38,7 +38,7 @@ export const FunctionalForm = ({
   const isLastNameInputValid = isNameInputValid(lastNameInput);
   const isEmailInputValid = isEmailValid(emailInput);
   const isCityInputValid = isCityValid(cityInput);
-  const isPhoneInputValid = isPhoneValid(phoneInputState);
+  const isPhoneInputValid = isPhoneValid(phoneInput);
 
   const shouldShowFirstNameError = showErrors && !isFirstNameInputValid;
   const shouldShowLastNameError = showErrors && !isLastNameInputValid;
@@ -47,15 +47,13 @@ export const FunctionalForm = ({
   const shouldShowPhoneInputError = showErrors && !isPhoneInputValid;
 
   const hasNoErrors = () => {
-    if (
+    return (
       isFirstNameInputValid &&
       isLastNameInputValid &&
       isEmailInputValid &&
       isCityInputValid && 
       isPhoneInputValid
-    ) {
-      return true;
-    }
+    ) 
   };
 
   const ref0 = useRef<HTMLInputElement>(null);
@@ -91,7 +89,7 @@ export const FunctionalForm = ({
       // added ' && index > 0 ' so that all inputs from ref[0] can be deleted. 
       const shouldGoToPrevRef = value.length === 0 && index > 0;
 
-      const newState = phoneInputState.map((phoneInput, phoneInputIndex) =>
+      const newState = phoneInput.map((phoneInput, phoneInputIndex) =>
         index === phoneInputIndex ? e.target.value : phoneInput
       ) as PhoneInputState;
 
@@ -103,7 +101,7 @@ export const FunctionalForm = ({
         prevRef.current?.focus();
       }
 
-      setPhoneInputState(newState);
+      setPhoneInput(newState);
     };
 
   const reset = () => {
@@ -111,28 +109,31 @@ export const FunctionalForm = ({
     setLastNameInput('')
     setEmailInput('') 
     setCityInput('')
-    setPhoneInputState(['','','',''])
+    setPhoneInput(['','','',''])
     setShowErrors(false)
+  }
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault(); 
+    setShowErrors(true); 
+
+    if (hasNoErrors()) {
+      handleUserInformation({
+        firstName: firstNameInput,
+        lastName: lastNameInput, 
+        email: emailInput, 
+        city: cityInput,
+        phone: phoneInput,
+      })
+      reset(); 
+    } else {
+      alert('Bad data Input'); 
+    }
   }
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setShowErrors(true);
-        if (hasNoErrors()) {
-          handleUserInformation({
-            firstName: firstNameInput,
-            lastName: lastNameInput,
-            email: emailInput,
-            city: cityInput,
-            phone: phoneInputState,
-          });
-          reset();
-        } else {
-          alert('Bad data Input');
-        }
-      }}
+      onSubmit={handleSubmit}
     >
       <u>
         <h3>User Information Form</h3>
@@ -207,7 +208,7 @@ export const FunctionalForm = ({
         */}
         <datalist id="cityOptions">
           {allCities.map((city) => (
-            <option value={city} id={city}></option>
+            <option key={city} value={city} id={city}></option>
           ))}
         </datalist>
       </div>
@@ -223,7 +224,7 @@ export const FunctionalForm = ({
             id="phone-input-1"
             placeholder="55"
             ref={ref0}
-            value={phoneInputState[0]}
+            value={phoneInput[0]}
             onChange={createOnChangeHandler(0)}
           />
           -
@@ -232,7 +233,7 @@ export const FunctionalForm = ({
             id="phone-input-2"
             placeholder="55"
             ref={ref1}
-            value={phoneInputState[1]}
+            value={phoneInput[1]}
             onChange={createOnChangeHandler(1)}
           />
           -
@@ -241,7 +242,7 @@ export const FunctionalForm = ({
             id="phone-input-3"
             placeholder="55"
             ref={ref2}
-            value={phoneInputState[2]}
+            value={phoneInput[2]}
             onChange={createOnChangeHandler(2)}
           />
           -
@@ -250,7 +251,7 @@ export const FunctionalForm = ({
             id="phone-input-4"
             placeholder="5"
             ref={ref3}
-            value={phoneInputState[3]}
+            value={phoneInput[3]}
             onChange={createOnChangeHandler(3)}
           />
         </div>
