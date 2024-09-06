@@ -38,7 +38,10 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
     showErrors: false,
   }
 
-
+/*
+  Put the validation results in a method since we cant declare them as a variable
+  like in the function component.
+*/
   isFirstNameInputValid = () => isNameInputValid(this.state.firstNameInput);
   isLastNameInputValid = () => isNameInputValid(this.state.lastNameInput);
   isEmailInputValid = () => isEmailValid(this.state.emailInput);
@@ -51,12 +54,6 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
   shouldShowCityInputError = () => this.state.showErrors && !this.isCityInputValid();
   shouldShowPhoneInputError = () => this.state.showErrors && !this.isPhoneInputValid();
 
-  /*
-    Since we can't decalre variables for validation checks like we can in functional components,
-    we can put the validations checks in methods, that way they are not only defined on render,
-    but can also be called every render. 
-  */
-
   hasNoErrors = () => {
     return (
       this.isFirstNameInputValid() &&
@@ -67,6 +64,7 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
     )
   };
 
+  // createRef is used in a class component instead of useRef in a functional component. 
   ref0 = createRef<HTMLInputElement>();
   ref1 = createRef<HTMLInputElement>();
   ref2 = createRef<HTMLInputElement>();
