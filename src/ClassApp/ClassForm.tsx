@@ -1,6 +1,11 @@
 import { Component, createRef, RefObject, ChangeEvent, FormEvent } from "react";
 import { ErrorMessage } from "../ErrorMessage";
-import { isEmailValid, isCityValid, isNameInputValid, isPhoneValid } from '../utils/validations'
+import { 
+  isEmailValid, 
+  isCityValid, 
+  isNameInputValid, 
+  isPhoneValid 
+} from '../utils/validations'
 import { allCities } from '../utils/all-cities'
 import { UserInformation, PhoneInputState } from '../types'
 
@@ -24,13 +29,13 @@ type State = {
 }
 
 export class ClassForm extends Component<Props, State, PhoneInputState> {
-    state = {
-      firstNameInput: '', 
-      lastNameInput: '', 
-      emailInput:'',
-      cityInput:'',
-      phoneInputState:['','','',''] as PhoneInputState,
-      showErrors: false, 
+  state = {
+    firstNameInput: '',
+    lastNameInput: '',
+    emailInput: '',
+    cityInput: '',
+    phoneInputState: ['', '', '', ''] as PhoneInputState,
+    showErrors: false,
   }
 
 
@@ -46,11 +51,11 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
   shouldShowCityInputError = () => this.state.showErrors && !this.isCityInputValid();
   shouldShowPhoneInputError = () => this.state.showErrors && !this.isPhoneInputValid();
 
-/*
-  Since we can't decalre variables for validation checks like we can in functional components,
-  we can put the validations checks in methods, that way they are not only defined on render,
-  but can also be called every render. 
-*/
+  /*
+    Since we can't decalre variables for validation checks like we can in functional components,
+    we can put the validations checks in methods, that way they are not only defined on render,
+    but can also be called every render. 
+  */
 
   hasNoErrors = () => {
     return (
@@ -62,12 +67,12 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
     )
   };
 
-  ref0 = createRef<HTMLInputElement>(); 
-  ref1 = createRef<HTMLInputElement>(); 
-  ref2 = createRef<HTMLInputElement>(); 
-  ref3 = createRef<HTMLInputElement>(); 
-  
-  refsArray: RefObject<HTMLInputElement> [] = [this.ref0, this.ref1, this.ref2, this.ref3]; 
+  ref0 = createRef<HTMLInputElement>();
+  ref1 = createRef<HTMLInputElement>();
+  ref2 = createRef<HTMLInputElement>();
+  ref3 = createRef<HTMLInputElement>();
+
+  refsArray: RefObject<HTMLInputElement>[] = [this.ref0, this.ref1, this.ref2, this.ref3];
 
   createOnChangeHandler = (index: 0 | 1 | 2 | 3) => (e: ChangeEvent<HTMLInputElement>) => {
     const lengths = [2, 2, 2, 1];
@@ -88,43 +93,43 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
 
     const shouldGoToPrevRef = value.length === 0 && index > 0;
 
-    const newState = this.state.phoneInputState.map((phoneInput, phoneInputIndex) => 
+    const newState = this.state.phoneInputState.map((phoneInput, phoneInputIndex) =>
       index === phoneInputIndex ? e.target.value : phoneInput
     ) as PhoneInputState;
 
     if (shouldGoToNextRef) {
-      nextRef.current?.focus(); 
+      nextRef.current?.focus();
     }
 
     if (shouldGoToPrevRef) {
       prevRef.current?.focus
     }
 
-    this.setState({phoneInputState: newState})
+    this.setState({ phoneInputState: newState })
   }
 
   reset = () => {
     this.setState({
-      firstNameInput:'', 
-      lastNameInput:'',
-      emailInput:'',
-      cityInput:'',
-      phoneInputState: ['','','',''],
-      showErrors:false, 
+      firstNameInput: '',
+      lastNameInput: '',
+      emailInput: '',
+      cityInput: '',
+      phoneInputState: ['', '', '', ''],
+      showErrors: false,
     });
   };
 
-  handleSubmit = (e: FormEvent) => { 
-    e.preventDefault(); 
+  handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     this.setState({ showErrors: true });
-    
-    if(this.hasNoErrors()) {
+
+    if (this.hasNoErrors()) {
       this.props.handleUserInformation({
         firstName: this.state.firstNameInput,
         lastName: this.state.lastNameInput,
         email: this.state.emailInput,
         city: this.state.cityInput,
-        phone: this.state.phoneInputState, 
+        phone: this.state.phoneInputState,
       });
       this.reset();
     } else {
@@ -134,16 +139,16 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
 
   render() {
     const {
-      firstNameInput, 
-      lastNameInput, 
-      emailInput, 
-      cityInput, 
-      phoneInputState, 
+      firstNameInput,
+      lastNameInput,
+      emailInput,
+      cityInput,
+      phoneInputState,
       showErrors,
     } = this.state
 
     return (
-      <form onSubmit = {this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <u>
           <h3>User Information Form</h3>
         </u>
@@ -151,11 +156,11 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
         {/* first name input */}
         <div className="input-wrap">
           <label>{"First Name"}:</label>
-          <input 
-            placeholder="Bilbo" 
+          <input
+            placeholder="Bilbo"
             type='text'
             value={firstNameInput}
-            onChange = {(e) => {
+            onChange={(e) => {
               e.preventDefault();
               this.setState({ firstNameInput: e.target.value })
             }}
@@ -168,11 +173,11 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
         {/* last name input */}
         <div className="input-wrap">
           <label>{"Last Name"}:</label>
-          <input 
-            placeholder="Baggins" 
+          <input
+            placeholder="Baggins"
             type='text'
             value={lastNameInput}
-            onChange = {(e) => {
+            onChange={(e) => {
               e.preventDefault();
               this.setState({ lastNameInput: e.target.value })
             }}
@@ -185,14 +190,14 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
         {/* Email Input */}
         <div className="input-wrap">
           <label>{"Email"}:</label>
-          <input 
+          <input
             placeholder="bilbo-baggins@adventurehobbits.net"
             type='text'
             value={emailInput}
             onChange={(e) => {
               e.preventDefault();
               this.setState({ emailInput: e.target.value })
-            }} 
+            }}
           />
         </div>
         {showErrors && this.shouldShowEmailInputError() && (
@@ -202,18 +207,18 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
         {/* City Input */}
         <div className="input-wrap">
           <label>{"City"}:</label>
-          <input 
-            placeholder="Hobbiton" 
+          <input
+            placeholder="Hobbiton"
             type='text'
             value={cityInput}
             list='cityOptions'
             onChange={(e) => {
               e.preventDefault();
-              this.setState({ cityInput: e.target.value }) 
+              this.setState({ cityInput: e.target.value })
             }}
           />
 
-          <datalist id="cityOptions"> 
+          <datalist id="cityOptions">
             {allCities.map((city) => (
               <option key={city} value={city} id={city}></option>
             ))}
@@ -222,42 +227,42 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
         {showErrors && this.shouldShowCityInputError() && (
           <ErrorMessage message={cityErrorMessage} show={true} />
         )}
-        
+
 
         <div className="input-wrap">
           <label htmlFor="phone">Phone:</label>
           <div id="phone-input-wrap">
-            <input 
-              type="text" 
-              id="phone-input-1" 
+            <input
+              type="text"
+              id="phone-input-1"
               placeholder="55"
               ref={this.ref0}
               value={this.state.phoneInputState[0]}
               onChange={this.createOnChangeHandler(0)}
             />
             -
-            <input 
-              type="text" 
-              id="phone-input-2" 
+            <input
+              type="text"
+              id="phone-input-2"
               placeholder="55"
               ref={this.ref1}
               value={phoneInputState[1]}
-              onChange={this.createOnChangeHandler(1)} 
+              onChange={this.createOnChangeHandler(1)}
             />
             -
-            <input 
-              type="text" 
-              id="phone-input-3" 
-              placeholder="55" 
+            <input
+              type="text"
+              id="phone-input-3"
+              placeholder="55"
               ref={this.ref2}
               value={phoneInputState[2]}
               onChange={this.createOnChangeHandler(2)}
             />
             -
-            <input 
-              type="text"  
-              id="phone-input-4" 
-              placeholder="5" 
+            <input
+              type="text"
+              id="phone-input-4"
+              placeholder="5"
               ref={this.ref3}
               value={phoneInputState[3]}
               onChange={this.createOnChangeHandler(3)}
