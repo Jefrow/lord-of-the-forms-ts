@@ -44,7 +44,6 @@ export const ProfileInformation = ({
         <InfoRow label="First Name" value={captFName} />
         <InfoRow label="Last Name" value={captLName} />
         <InfoRow label="City" value={city} />
-        {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
         <InfoRow label="Phone" value={phoneNumber} />
       </div>
     </>

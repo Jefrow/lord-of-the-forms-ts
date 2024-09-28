@@ -23,7 +23,6 @@ export const FunctionalPhoneInput = ({
 
   const refs = [ref0, ref1, ref2, ref3];
 
-    //onChangeHandler function that returns a function to keep track of each phone input state. 
     const createOnChangeHandler =
     (index: 0 | 1 | 2 | 3): ChangeEventHandler<HTMLInputElement> =>
     (e) => {
@@ -35,19 +34,17 @@ export const FunctionalPhoneInput = ({
       const value = e.target.value;
       const validRegex = /^\d*$/
 
-      // makes sure that each input only allows the max input length to be typed in. 
       if (value.length > currentMaxLength) {
         return;
       }
 
-      // only allows numeric value input. 
       if (!validRegex.test(value)) {
         return;
       }
 
       const shouldGoToNextRef =
         currentMaxLength === value.length && nextRef?.current;
-      // added ' && index > 0 ' so that all inputs from ref[0] can be deleted. 
+  
       const shouldGoToPrevRef = value.length === 0 && index > 0;
 
       const newState = phoneInputState.map((phoneInput, phoneInputIndex) =>
