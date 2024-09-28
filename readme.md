@@ -54,7 +54,7 @@ To get this project setup, you should:
 
 ## Typescript Specific Requirements
 
-- [x] pass **ALL** type-checks
+- [ ] pass **ALL** type-checks
   - Check by running `npm run typecheck`
 - [x] DON'T USE `any`.... OR ELSE
 - [x] Keep your types clean and in a logical location
