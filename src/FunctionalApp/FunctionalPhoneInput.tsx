@@ -6,16 +6,15 @@ export const FunctionalPhoneInput = ({
   phoneInputState,
   setPhoneInputState,
   showError,
-  isValid, 
+  isValid,
   errorMessage,
 }: {
   phoneInputState: PhoneInputState;
   setPhoneInputState: Dispatch<SetStateAction<PhoneInputState>>;
   showError: boolean;
-  isValid: boolean; 
-  errorMessage: string; 
+  isValid: boolean;
+  errorMessage: string;
 }) => {
-
   const ref0 = useRef<HTMLInputElement>(null);
   const ref1 = useRef<HTMLInputElement>(null);
   const ref2 = useRef<HTMLInputElement>(null);
@@ -23,7 +22,7 @@ export const FunctionalPhoneInput = ({
 
   const refs = [ref0, ref1, ref2, ref3];
 
-    const createOnChangeHandler =
+  const createOnChangeHandler =
     (index: 0 | 1 | 2 | 3): ChangeEventHandler<HTMLInputElement> =>
     (e) => {
       const lengths = [2, 2, 2, 1];
@@ -32,7 +31,7 @@ export const FunctionalPhoneInput = ({
       const nextRef = refs[index + 1];
       const prevRef = refs[index - 1];
       const value = e.target.value;
-      const validRegex = /^\d*$/
+      const validRegex = /^\d*$/;
 
       if (value.length > currentMaxLength) {
         return;
@@ -44,7 +43,7 @@ export const FunctionalPhoneInput = ({
 
       const shouldGoToNextRef =
         currentMaxLength === value.length && nextRef?.current;
-  
+
       const shouldGoToPrevRef = value.length === 0 && index > 0;
 
       const newState = phoneInputState.map((phoneInput, phoneInputIndex) =>
@@ -104,7 +103,9 @@ export const FunctionalPhoneInput = ({
           />
         </div>
       </div>
-      {showError && !isValid && <ErrorMessage message={errorMessage} show={true} />}
+      {showError && !isValid && (
+        <ErrorMessage message={errorMessage} show={true} />
+      )}
     </>
   );
 };

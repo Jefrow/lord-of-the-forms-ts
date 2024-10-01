@@ -1,4 +1,4 @@
-import { useState,FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { messages } from "../ErrorMessage";
 import {
   isEmailValid,
@@ -10,7 +10,6 @@ import { allCities } from "../utils/all-cities";
 import { UserInformation, PhoneInputState } from "../types";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 import { FunctionalTextInput } from "./FunctionalTextInput";
-
 
 export const FunctionalForm = ({
   handleUserInformation,
@@ -34,7 +33,6 @@ export const FunctionalForm = ({
   const isEmailInputValid = isEmailValid(emailInput);
   const isCityInputValid = isCityValid(cityInput);
   const isPhoneInputValid = isPhoneValid(phoneInput);
-
 
   const hasNoErrors = () => {
     return (

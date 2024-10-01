@@ -1,5 +1,5 @@
 import { Component, FormEvent } from "react";
-import {  messages } from "../ErrorMessage";
+import { messages } from "../ErrorMessage";
 import {
   isEmailValid,
   isCityValid,
@@ -108,7 +108,6 @@ export class ClassForm extends Component<Props, State, PhoneInputState> {
           errorMessage={messages.firstName}
           showError={showErrors}
         />
-
 
         <ClassTextInput
           label={"Last Name"}

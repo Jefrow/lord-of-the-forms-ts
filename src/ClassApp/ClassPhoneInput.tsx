@@ -1,13 +1,13 @@
 import { Component, createRef, RefObject, ChangeEvent } from "react";
 import { PhoneInputState } from "../types";
-import { ErrorMessage } from '../ErrorMessage'
+import { ErrorMessage } from "../ErrorMessage";
 
 type PhoneInputProps = {
   phoneInputState: PhoneInputState;
   setPhoneInputState: (state: PhoneInputState) => void;
   showError: boolean;
-  isValid: boolean; 
-  errorMessage: string; 
+  isValid: boolean;
+  errorMessage: string;
 };
 
 export class ClassPhoneInput extends Component<PhoneInputProps> {
@@ -23,7 +23,7 @@ export class ClassPhoneInput extends Component<PhoneInputProps> {
       const nextRef = this.refsArray[index + 1];
       const prevRef = this.refsArray[index - 1];
       const value = e.target.value;
-      const validRegex = /^\d*$/
+      const validRegex = /^\d*$/;
 
       if (value.length > currentMaxLength) {
         return;
@@ -51,7 +51,7 @@ export class ClassPhoneInput extends Component<PhoneInputProps> {
         prevRef.current?.focus;
       }
 
-      this.props.setPhoneInputState(newState)
+      this.props.setPhoneInputState(newState);
     };
 
   refsArray: RefObject<HTMLInputElement>[] = [
@@ -61,7 +61,7 @@ export class ClassPhoneInput extends Component<PhoneInputProps> {
     this.ref3,
   ];
   render() {
-    const { phoneInputState, isValid, showError, errorMessage } = this.props
+    const { phoneInputState, isValid, showError, errorMessage } = this.props;
     return (
       <>
         <div className="input-wrap">
@@ -70,7 +70,6 @@ export class ClassPhoneInput extends Component<PhoneInputProps> {
             <input
               type="text"
               id="phone-input-1"
-
               placeholder="55"
               ref={this.ref0}
               value={phoneInputState[0]}
@@ -105,7 +104,9 @@ export class ClassPhoneInput extends Component<PhoneInputProps> {
             />
           </div>
         </div>
-        {showError && !isValid && <ErrorMessage message={errorMessage} show={true} /> }
+        {showError && !isValid && (
+          <ErrorMessage message={errorMessage} show={true} />
+        )}
       </>
     );
   }

@@ -5,22 +5,20 @@ import { ProfileInformation } from "../ProfileInformation";
 type State = { userInformation: UserInformation | null };
 
 export class ClassApp extends Component<Record<string, never>, State> {
-  state ={
-    userInformation: null 
-  }
+  state = {
+    userInformation: null,
+  };
 
   render() {
     return (
       <>
         <h2>Class</h2>
-        <ProfileInformation
-          userData={
-            this.state.userInformation
-          }
+        <ProfileInformation userData={this.state.userInformation} />
+        <ClassForm
+          handleUserInformation={(userInfo) => {
+            this.setState({ userInformation: userInfo });
+          }}
         />
-        <ClassForm handleUserInformation={(userInfo) => {
-          this.setState({userInformation:userInfo})
-        }}/>
       </>
     );
   }
