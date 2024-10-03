@@ -48,7 +48,7 @@ export class ClassPhoneInput extends Component<PhoneInputProps> {
       }
 
       if (shouldGoToPrevRef) {
-        prevRef.current?.focus;
+        prevRef.current?.focus();
       }
 
       this.props.setPhoneInputState(newState);
